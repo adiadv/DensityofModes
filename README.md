@@ -11,6 +11,6 @@ File Name: getDOMvelocity:
 
 This file takes a string of velocities and gives you the Autocorr and DOM invidually for each device and also does an average. 
 
-Both files above can pad the data to 2^n, but do not do this in general. You need to uncomment and change those lines manually. 
+Both files above pad data to double length and do a velocity autocorr in fourier space. They also include a 60hz filter which is on by default. You need the SIGNAL PROCESSING TOOLBOX to use these files.  
 
 Input Expected: Columns of particle velocities (no time required). 
