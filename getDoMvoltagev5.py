@@ -28,10 +28,10 @@ rate = 100000000 #update this
 timespan = 1 #update this
 nosamples = int(rate*timespan)
 
-filenames = ['rot0_dataonly.csv'] #add the files
-colors = ['c'] #colors for the plots
-line_thickness = [1.0] #leave this probably (imo)
-labels = ['0% Strain'] #labels for legends
+filenames = ['rot5_dataonly.csv', 'rot4_dataonly.csv','rot3_dataonly.csv','rot2_dataonly.csv', 'rot1_dataonly.csv','rot0_dataonly.csv'] #add the files
+colors = ['red','orange','gold','limegreen','b','m']#colors for the plots
+line_thickness = [1.0,1.0,1.0,1.0,1.0,1.0] #leave this probably (imo)
+labels = ['5% Strain', '4% Strain', '3% Strain', '2% Strain', '1% Strain', '0% Strain'] #labels for legends
 #########################################################################################
 
 def timekeeper(n, deltat): #as usual, leave the timekeeper be. If you decide to forgo the timekeeper, face the consequences on your own (or email me your choice)
@@ -160,11 +160,12 @@ plt.show()
 #DoM Plot
 plt.figure()
 for i in range(len(DoM_vec_outs)):
-    plt.loglog(fv_plot_outs[i], DoM_vec_outs[i], color = colors[i], linewidth = line_thickness[i], label = labels[i]) #now the DoM is plotted with some 60hz noise but you edit it and fix that and then realize that its sloped downwards? Why? is my system cooked? #Debye scaling who?
+    plt.loglog(fv_plot_outs[i], 10**(10*i) * DoM_vec_outs[i], color = colors[i], linewidth = line_thickness[i], label = labels[i]) #now the DoM is plotted with some 60hz noise but you edit it and fix that and then realize that its sloped downwards? Why? is my system cooked? #Debye scaling who?
 plt.title('Density of Modes')
-plt.ylabel('Density of Modes')
+plt.ylabel('Density of Modes (au)')
 plt.xlabel('Frequency (Hz)')
 plt.xlim([1, rate / 2])
+#plt.xlim([8000, 800000])
 plt.legend(loc = 'best')
 plt.show()
 
@@ -174,7 +175,7 @@ fv3 = np.linspace(0,rate/2, len(psdx))
 
 plt.figure()
 for i in range(len(psdx_list)):
-    plt.semilogy(fvpsd_list[i], psdx_list[i], color = colors[i], linewidth = line_thickness[i], label = labels[i]) #lets be honest you dont check this if you dont have to because its after the DoM plot and thats all you care about isnt it
+    plt.loglog(fvpsd_list[i], psdx_list[i], color = colors[i], linewidth = line_thickness[i], label = labels[i]) #lets be honest you dont check this if you dont have to because its after the DoM plot and thats all you care about isnt it
 plt.title('PSD vs f')
 plt.ylabel('Power Spectral Density')
 plt.xlabel('Frequency (Hz)')
